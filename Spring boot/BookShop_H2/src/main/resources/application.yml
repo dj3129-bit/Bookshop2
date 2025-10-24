@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: BookShop_H2
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:bookshop
+    username: sa
+    password: sa
+
+  sql:
+    init:
+      schema-locations: classpath:h2database_schema.sql 
+      data-locations: classpath:h2database_data.sql 
+
+  h2:
+    console:
+      enabled: true
+      path: /h2
+
+mybatis:
+  mapper-locations: mapper/*.xml
+  type-aliases-package: kr.ac.kopo.bookshop.model
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+server:
+  port: 9091
