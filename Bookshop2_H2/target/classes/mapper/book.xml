@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="book">
+
+	<sql id="search">
+		SELECT * FROM book
+		
+		<where>
+			<if test="search == 1">
+				code=#{keyword}
+			</if>
+			
+			<if test="search == 2">
+				title LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+			</if>
+			
+			<if test="search == 3">
+				publisher LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+			</if>
+		</where>
+		
+		ORDER BY code
+	</sql>
+	
+	<select id="total" resultType="Integer">
+		SELECT COUNT(*) FROM (<include refid="search"></include>) T1
+	</select>
+
+	<select id="list" resultType="book">
+		SELECT * FROM
+    		(SELECT T1.*, ROWNUM rnum FROM
+        		(<include refid="search"></include>) T1)
+        		
+        <if test="perPage != 0">
+        	WHERE rnum BETWEEN ((#{page} - 1) * #{perPage}) + 1 AND (#{page} * #{perPage})
+        </if>
+	</select>
+	
+   	<insert id="add">
+		INSERT INTO book
+		(code, title, publisher, price, pub_date)
+		VALUES (#{title}, #{publisher}, #{price}, #{pubDate})
+	</insert>
+	
+	<update id="update">
+		UPDATE book
+		SET book_code=#{book_code}, title=#{title}, publisher=#{publisher}, price=#{price}, pub_date=#{pubDate}
+		WHERE book_code=#{book_code}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM book
+		WHERE code=#{code}
+	</delete>
+	
+	<select id="item" resultType="book">
+		SELECT * FROM book
+		WHERE code=#{code}
+	</select>
+	
+</mapper>
