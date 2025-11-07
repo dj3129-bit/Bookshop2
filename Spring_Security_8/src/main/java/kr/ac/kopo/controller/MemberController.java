@@ -113,4 +113,26 @@ public class MemberController {
 		
 		return path + "authority";
 	}
+	
+	@GetMapping("/authority/{id}/add/{authority}")
+	String authority_add(@PathVariable String id, @PathVariable String authority) {
+		Authority item = new Authority();
+		item.setId(id);
+		item.setAuthority(authority);
+		
+		authorityService.add_member(item);
+		
+		return "redirect:../list";
+	}
+	
+	@GetMapping("/authority/{id}/delete/{authority}")
+	String authority_delete(@PathVariable String id, @PathVariable String authority) {
+		Authority item = new Authority();
+		item.setId(id);
+		item.setAuthority(authority);
+		
+		authorityService.delete_member(item);
+		
+		return "redirect:../list";
+	}
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.ac.kopo.dao.MemberDao;
 import kr.ac.kopo.model.Member;
@@ -38,6 +39,7 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 	
+	@Transactional
 	@Override
 	public Member item(String id) {
 		return dao.item(id);	

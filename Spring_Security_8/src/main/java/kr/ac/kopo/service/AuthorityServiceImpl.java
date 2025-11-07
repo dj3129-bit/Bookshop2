@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.ac.kopo.dao.AuthorityDao;
 import kr.ac.kopo.model.Authority;
@@ -39,9 +40,20 @@ public class AuthorityServiceImpl implements AuthorityService {
 		dao.delete(item);
 	}
 
+	@Transactional
 	@Override
 	public List<Authority> list(String id) {
 		return dao.list(id);
+	}
+
+	@Override
+	public void add_member(Authority item) {
+		dao.add_member(item);
+	}
+
+	@Override
+	public void delete_member(Authority item) {
+		dao.delete_member(item);
 	}
 
 }

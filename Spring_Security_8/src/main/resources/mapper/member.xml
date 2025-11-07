@@ -22,8 +22,19 @@
 		WHERE id=#{id}
 	</delete>
 	
-	<select id="item" resultType="Member">
-		SELECT * FROM member
-		WHERE id=#{id}
+	<resultMap type="Member" id="MemberMap" autoMapping="true">
+		<id column="id" property="id"/>
+		
+		<collection property="authority" column="mid" javaType="ArrayList" ofType="Authority" autoMapping="true">
+			<id column="authority" property="authority" />
+		</collection>
+	</resultMap>
+	
+	<select id="item" resultMap="MemberMap">
+		SELECT m.*, ma.id, a.* 
+		FROM member m
+		LEFT JOIN member_authority ma ON m.id=ma.id
+		LEFT JOIN authority a ON ma.authority=a.authority 
+		WHERE m.id=#{id}
 	</select>
 </mapper>

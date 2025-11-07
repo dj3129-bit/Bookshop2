@@ -17,5 +17,9 @@ public interface AuthorityDao {
 	void delete(Authority item);
 
 	List<Authority> list(String id);
+
+	void add_member(Authority item);
+
+	void delete_member(Authority item);
 	
 }

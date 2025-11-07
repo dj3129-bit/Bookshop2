@@ -36,9 +36,9 @@
 						<td th:text="${item.name}">-</td>
 						<td th:text="${item.tel}">-</td>
 						<td>
-							<a th:href="@{/update/${item.id}/}">변경</a> 
-							<a th:href="@{/delete/${item.id}/}">삭제</a>
-							<a th:href="@{/authority/${item.id}/}">권한관리</a>
+							<a th:href="@{/member/update/{id}(id=${item.id})}">변경</a> 
+							<a th:href="@{/member/delete/{id}(id=${item.id})}">삭제</a>
+							<a th:href="@{authority/{id}/list(id=${item.id})}">권한관리</a>
 						</td>
 					</tr>
 				</tbody>

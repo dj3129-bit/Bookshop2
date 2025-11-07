@@ -41,7 +41,17 @@ public class AuthorityDaoImpl implements AuthorityDao {
 
 	@Override
 	public List<Authority> list(String id) {
-		return sql.selectList("authority.list", id);
+		return sql.selectList("authority.list_member", id);
+	}
+
+	@Override
+	public void add_member(Authority item) {
+		sql.insert("authority.add_member", item);
+	}
+
+	@Override
+	public void delete_member(Authority item) {
+		sql.delete("authority.delete_member", item);
 	}
 
 }

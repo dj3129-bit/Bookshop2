@@ -18,4 +18,8 @@ public interface AuthorityService {
 
 	List<Authority> list(String id);
 
+	void add_member(Authority item);
+
+	void delete_member(Authority item);
+
 }

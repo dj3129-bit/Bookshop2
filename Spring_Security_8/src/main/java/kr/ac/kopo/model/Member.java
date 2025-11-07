@@ -2,6 +2,7 @@ package kr.ac.kopo.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,19 +16,19 @@ public class Member implements UserDetails {
 	private String password;
 	private String tel;
 	private String name;
+	
+	private List<Authority> authority;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		var list = new ArrayList<GrantedAuthority>();
 		
-		if("kopo".equals(id)) {
-			list.add(new SimpleGrantedAuthority("ROLE_BOOK"));
-		} else if("admin".equals(id)) {
-			list.add(new SimpleGrantedAuthority("ROLE_BOOK"));
-			list.add(new SimpleGrantedAuthority("ROLE_CUSTOMER"));
-			list.add(new SimpleGrantedAuthority("ROLE_ORDERS"));
+		for(Authority item : authority) {
+			String role = item.getAuthority();
+			if(role != null && !role.isEmpty()) {
+				list.add(new SimpleGrantedAuthority(role));
+			}
 		}
-		
 		return list;
 	}
 
@@ -67,6 +68,14 @@ public class Member implements UserDetails {
 	@Override
 	public String getUsername() {
 		return id;
+	}
+
+	public List<Authority> getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(List<Authority> authority) {
+		this.authority = authority;
 	}
 
 }
