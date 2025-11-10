@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">
+	<select id="list" resultType="member">
+		SELECT * FROM member
+	</select>
+	
+   	<insert id="add">
+		INSERT INTO member 
+		VALUES (#{id}, #{password}, #{name}, #{tel})
+	</insert>
+	
+	<update id="update">
+		UPDATE member
+		SET password=#{password}, name=#{name}, tel=#{tel}
+		WHERE id=#{id}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM member
+		WHERE id=#{id}
+	</delete>
+	
+	<resultMap type="Member" id="MemberMap" autoMapping="true">
+		<id column="id" property="id"/>
+		
+		<collection notNullColumn="rid" property="roles" javaType="ArrayList" ofType="Role" autoMapping="true">
+			<id column="role" property="role" />
+		</collection>
+	</resultMap>
+	
+	<resultMap type="Role" id="RoleMap" autoMapping="true">
+		<id column="role" property="role"/>
+		
+		<collection column="arole" property="authority" javaType="ArrayList" ofType="Authority" autoMapping="true">
+			<id column="authority" property="authority" />
+		</collection>
+	</resultMap>
+	
+	<select id="item" resultMap="MemberMap">
+		SELECT m.*, mr.id rid, r.role, r.label, r.descript, ra.authority arole, 
+		a.authority, a.label, a.descript
+		FROM member m
+		LEFT JOIN member_role mr ON m.id=mr.id
+		LEFT JOIN role r ON mr.role=r.role
+		LEFT JOIN role_authority ra ON r.role=ra.role
+		LEFT JOIN  authority a ON ra.authority=a.authority 
+		WHERE m.id=#{id}
+	</select>
+</mapper>

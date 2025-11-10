@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<div>
+		<div>
+			<h1>Role Based Access Control(Spring Security)</h1>
+		</div>
+		
+		<div>
+			<div sec:authorize="isAnonymous()"><a href="/login">로그인</a></div>
+			<div sec:authorize="isAuthenticated()">
+				<div><p sec:authentication="name"></p></div>
+				<div><p sec:authentication="authorities"></p></div>
+				<div><a href="/logout">로그아웃</a></div>
+			</div>
+		</div>
+		
+		<div>
+			<div><a href="member/list">사용자관리</a></div>
+			<div><a href="authority/list">권한관리</a></div>
+			<div><a href="role/list">역할관리</a></div>
+			<div><a href="book/list">도서관리</a></div>
+			<div><a href="customer/list">고객관리</a></div>
+			<div><a href="orders/list">주문관리</a></div>
+		</div>
+	</div>
+</body>
+</html>
