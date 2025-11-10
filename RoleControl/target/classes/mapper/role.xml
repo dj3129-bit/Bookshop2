@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="role">
+	<select id="list_authority" resultType="Authority">
+		SELECT * FROM authority a
+		LEFT JOIN role_authority ra 
+		ON a.authority=ra.authority AND ra.role=#{role}
+	</select>
+	
+	<insert id="add_authority">
+		INSERT INTO role_authority 
+		VALUES (#{role}, #{authority})
+	</insert>
+	
+	<delete id="delete_authority">
+		DELETE FROM role_authority
+		WHERE role=#{role} AND authority=#{authority}
+	</delete>
+
+	<select id="list" resultType="Role">
+		SELECT * FROM role
+	</select>
+	
+   	<insert id="add">
+		INSERT INTO role 
+		VALUES (#{role}, #{label}, #{descript})
+	</insert>
+	
+	<update id="update">
+		UPDATE role
+		SET label=#{label}, descript=#{descript}
+		WHERE role=#{role}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM role
+		WHERE role=#{role}
+	</delete>
+	
+	<select id="item" resultType="Role">
+		SELECT * FROM role
+		WHERE role=#{role}
+	</select>
+
+</mapper>
