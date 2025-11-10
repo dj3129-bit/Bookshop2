@@ -39,4 +39,19 @@ public class RoleServiceImpl implements RoleService {
 		dao.delete(role);
 	}
 
+	@Override
+	public List<Role> list(String id) {
+		return dao.list(id);
+	}
+
+	@Override
+	public void add_member(Role item) {
+		dao.add_member(item);
+	}
+
+	@Override
+	public void delete_member(Role item) {
+		dao.delete_member(item);
+	}
+
 }

@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kr.ac.kopo.rolecontrol.model.Authority;
 import kr.ac.kopo.rolecontrol.model.Member;
 import kr.ac.kopo.rolecontrol.model.RestResult;
-import kr.ac.kopo.rolecontrol.service.AuthorityService;
+import kr.ac.kopo.rolecontrol.model.Role;
 import kr.ac.kopo.rolecontrol.service.MemberService;
+import kr.ac.kopo.rolecontrol.service.RoleService;
 
 @Controller
 @RequestMapping("/member")
@@ -29,7 +29,7 @@ public class MemberController {
 	MemberService service;
 	
 	@Autowired
-	AuthorityService authorityService;
+	RoleService roleService;
 	
 	@GetMapping("/{id}")
 	Member item(@PathVariable String id) {
@@ -105,34 +105,35 @@ public class MemberController {
 		return "redirect:../list";
 	}
 	
-	@GetMapping("/authority/{id}/list")
-	String authority_list(@PathVariable String id, Model model) {
-		List<Authority> list = authorityService.list(id);
+	@GetMapping("/role/{id}/list")
+	String role_list(@PathVariable String id, Model model) {
+		List<Role> list = roleService.list(id);
 		
 		model.addAttribute("list", list);
 		
-		return path + "authority";
+		return "role/authority";
 	}
 	
-	@GetMapping("/authority/{id}/add/{authority}")
-	String authority_add(@PathVariable String id, @PathVariable String authority) {
-		Authority item = new Authority();
+	@GetMapping("/role/{id}/add/{authority}")
+	String role_add(@PathVariable String id, @PathVariable String role) {
+		Role item = new Role();
 		item.setId(id);
-		item.setAuthority(authority);
+		item.setRole(role);
 		
-		authorityService.add_member(item);
+		roleService.add_member(item);
 		
 		return "redirect:../list";
 	}
 	
-	@GetMapping("/authority/{id}/delete/{authority}")
-	String authority_delete(@PathVariable String id, @PathVariable String authority) {
-		Authority item = new Authority();
+	@GetMapping("/role/{id}/delete/{authority}")
+	String authority_delete(@PathVariable String id, @PathVariable String role) {
+		Role item = new Role();
 		item.setId(id);
-		item.setAuthority(authority);
+		item.setRole(role);
 		
-		authorityService.delete_member(item);
+		roleService.delete_member(item);
 		
 		return "redirect:../list";
 	}
+
 }

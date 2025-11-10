@@ -16,4 +16,10 @@ public interface RoleDao {
 
 	void delete(String role);
 
+	List<Role> list(String id);
+
+	void add_member(Role item);
+
+	void delete_member(Role item);
+
 }

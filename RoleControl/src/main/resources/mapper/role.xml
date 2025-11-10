@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="role">
-	<select id="list_authority" resultType="Authority">
-		SELECT * FROM authority a
-		LEFT JOIN role_authority ra 
-		ON a.authority=ra.authority AND ra.role=#{role}
+	<select id="list_member" resultType="Role">
+		SELECT * FROM role r
+		LEFT JOIN member_role mr
+		ON r.role=mr.role AND mr.role=#{role}
 	</select>
 	
-	<insert id="add_authority">
-		INSERT INTO role_authority 
-		VALUES (#{role}, #{authority})
+	<insert id="add_member">
+		INSERT INTO member_role
+		VALUES (#{role}, #{role})
 	</insert>
 	
-	<delete id="delete_authority">
-		DELETE FROM role_authority
-		WHERE role=#{role} AND authority=#{authority}
+	<delete id="delete_member">
+		DELETE FROM member_role
+		WHERE id=#{id} AND role=#{role}
 	</delete>
 
 	<select id="list" resultType="Role">

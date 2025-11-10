@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.ac.kopo.rolecontrol.model.Authority;
 import kr.ac.kopo.rolecontrol.model.Role;
+import kr.ac.kopo.rolecontrol.service.AuthorityService;
 import kr.ac.kopo.rolecontrol.service.RoleService;
 
 @Controller
@@ -20,6 +22,9 @@ public class RoleController {
 	
 	@Autowired
 	RoleService service;
+	
+	@Autowired
+	AuthorityService authorityService;
 	
 	@GetMapping("/list")
 	String list(Model model) {
@@ -66,4 +71,5 @@ public class RoleController {
 		
 		return "redirect:../list";
 	}
+	
 }

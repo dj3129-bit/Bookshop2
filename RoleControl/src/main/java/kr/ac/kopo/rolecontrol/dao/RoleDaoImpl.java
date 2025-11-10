@@ -39,4 +39,19 @@ public class RoleDaoImpl implements RoleDao {
 		sql.delete("role.delete", role);
 	}
 
+	@Override
+	public List<Role> list(String id) {
+		return sql.selectList("role.list", id);
+	}
+
+	@Override
+	public void add_member(Role item) {
+		sql.insert("role.add_member", item);
+	}
+
+	@Override
+	public void delete_member(Role item) {
+		sql.delete("role.delete_member", item);
+	}
+
 }

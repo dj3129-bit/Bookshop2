@@ -69,11 +69,11 @@ public class AuthorityController {
 		return "redirect:../list";
 	}
 	
-	@GetMapping("/{id}/list")
-    public String authority_list(@PathVariable String id, Model model) {
-        List<Authority> list = service.list(id);
+	@GetMapping("/{role}/list")
+    public String authority_list(@PathVariable String role, Model model) {
+        List<Authority> list = service.list(role);
         model.addAttribute("list", list);
         
-        return "member/authority"; 
+        return path + "list"; 
     }
 }

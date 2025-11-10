@@ -47,13 +47,13 @@ public class AuthorityServiceImpl implements AuthorityService {
 	}
 
 	@Override
-	public void add_member(Authority item) {
-		dao.add_member(item);
+	public void add_role(Authority item) {
+		dao.add_role(item);
 	}
 
 	@Override
-	public void delete_member(Authority item) {
-		dao.delete_member(item);
+	public void delete_role(Authority item) {
+		dao.delete_role(item);
 	}
 
 }

@@ -16,4 +16,10 @@ public interface RoleService {
 
 	public void delete(String role);
 
+	public List<Role> list(String id);
+
+	public void add_member(Role item);
+
+	public void delete_member(Role item);
+
 }

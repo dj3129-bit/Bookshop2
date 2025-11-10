@@ -7,6 +7,8 @@ public class Role {
 	private String label;
 	private String descript;
 	
+	private String id;
+	
 	private List<Authority> authority;
 	
 	public String getRole() {
@@ -33,5 +35,12 @@ public class Role {
 	public void setAuthority(List<Authority> authority) {
 		this.authority = authority;
 	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	
 }

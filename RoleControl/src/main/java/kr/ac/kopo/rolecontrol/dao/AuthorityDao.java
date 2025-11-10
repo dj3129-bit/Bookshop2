@@ -18,8 +18,8 @@ public interface AuthorityDao {
 
 	List<Authority> list(String id);
 
-	void add_member(Authority item);
+	void add_role(Authority item);
 
-	void delete_member(Authority item);
+	void delete_role(Authority item);
 	
 }

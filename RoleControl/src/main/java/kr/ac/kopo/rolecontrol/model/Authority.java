@@ -5,7 +5,7 @@ public class Authority {
 	private String label;
 	private String descript;
 	
-	private String id;
+	private String role;
 	
 	public String getAuthority() {
 		return authority;
@@ -25,11 +25,12 @@ public class Authority {
 	public void setDescript(String descript) {
 		this.descript = descript;
 	}
-	public String getId() {
-		return id;
+	public String getRole() {
+		return role;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setRole(String role) {
+		this.role = role;
 	}
+	
 	
 }
