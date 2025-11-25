@@ -40,8 +40,29 @@ const server = createServer((req, res) => {
         list = list.filter(value => value.bookid != bookid);
       }
     } else if(req.method === "PUT"){
+      const item = JSON.parse(body);
 
+      if(item){
+        list = list.filter(value => value.bookid != item.bookid);
+        list.push(item);
+      }
+    } else if(req.method === "GET"){
+      const bookid = req.url.split("/").at(-1);
+
+      if(bookid){
+        const item = list.find(value => value.bookid == bookid);
+
+        if(item)
+          res.end(JSON.stringify(item));
+        else
+          res.end("{}");
+
+        return;
+      }
+        
     }
+
+    list.sort((left, right) => left.bookid - right.bookid);
 
     res.end(JSON.stringify(list));
   })
