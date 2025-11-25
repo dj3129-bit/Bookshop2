@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "kopo.jwt.secret",
+  "type": "java.lang.String",
+  "description": "JWT 암호화 키"
+}]}
